@@ -1,4 +1,4 @@
-#MangoDB 架构 ／ MongoDB Architecture
+# MangoDB 架构 ／ MongoDB Architecture
 
 ###### Author Ricky Ho | Date 2012-04-02 | [ Raw ](https://horicky.blogspot.jp/2012/04/mongodb-architecture.html)
 
@@ -37,7 +37,7 @@ Here are some simple admin steps to start/stop MongoDb server：
 	> use admin
 	> db.shutdownServer()
 
-###与关系型数据库管理系统的主要区别 ／ Major difference from RDBMS
+### 与关系型数据库管理系统的主要区别 ／ Major difference from RDBMS
 
 MongoDB 在以下几个方面与关系型数据库管理系统（RDBMS）有所不同：  
 MongoDb differs from RDBMS in the following way：
@@ -61,7 +61,7 @@ There is no concept of "isolation", any data read by one client may have its val
 与传统 RDBMS 相比，MongoDB 减少了一些的特性，这使得它变得更轻量级、在大数据的任务中更易扩展。  
 By removing some of those features that a classical RDBMS will provide, MongoDb can be more light-weight and be more scalable in processing big data.  
 
-###查询处理 ／ Query processing
+### 查询处理 ／ Query processing
 
 MongoDB 是一种面向文档的数据库。在这种模式中，数据被组织成如 JSON 一样的”文档“，并存储入”数据集“中。“数据集”之于 MongoDB 正如“关系表”之于 RDBMS；类似地，“文档”也就相当于 RDBMS 中的“数据记录”。  
 MongoDb belongs to the type of document-oriented DB. In this model, data is organized as JSON document, and store into a collection. Collection can be thought for equivalent to Table and Document is equivalent to records in RDBMS world.
@@ -139,7 +139,7 @@ When there are multiple indexes available for a collection. When handling a quer
 因为只有一个索引会真正的在查询中被使用，寻找更适合的搜索／排序标准、建立更好的复合索引变的尤为重要。维护索引并非一件没有开销的工作，因为在文档创建、删除更新的过程中，索引都需要被及时的更新，这会造成过于频繁的索引更新操作。为了达到一种最优的平衡状态，我们需要周期性地评估索引的效率（比如依据读写比率）并及时删除低效的索引。  
 Since only one index will be used, it is important to look at the search or sorting criteria of the query and build additional composite index to match the query better. Maintaining an index is not without cost as index need to be updated when docs are created, deleted and updated, which incurs overhead to the update operations. To maintain an optimal balance, we need to periodically measure the effectiveness of having an index (e.g. the read/write ratio) and delete less efficient indexes.
 
-###存储模型 ／ Storage Model
+### 存储模型 ／ Storage Model
 
 MongoDB 使用一种 C++ 书写的内存映射文件，用于直接映射磁盘数据文件到内存字节组，通过这种方法可以使用指针运算实现数据访问逻辑。每一个文档数据集（译注：[在逻辑上]）都存储在一个对应的命名空间文件（这个文件包含了一些元数据信息）及多个extent（extent 是 Mongo 用于存储数据的一段物理上连续的空间，后均不译直接称为 extent）数据文件中（以呈几何倍数或双倍增长的方式扩大容量）。  
 Written in C++, MongoDB uses a memory map file that directly map an on-disk data file to in-memory byte array where data access logic is implemented using pointer arithmetic. Each document collection is stored in one namespace file (which contains metadata information) as well as multiple extent data files (with an exponentially/doubling increasing size).  
@@ -158,7 +158,7 @@ As we can imagine holes will be created over time as objects are created, delete
 B-树索引。每一个B-树节点内都包含一些键，分别指明其B-树上的左叶子节点。  
 Index are implemented as BTree. Each BTree node contains a number of keys (within this node), as well as pointers to left children BTree nodes of each key.
 
-###数据更新与事务 ／ Data update and Transaction
+### 数据更新与事务 ／ Data update and Transaction
 
 我们可以通过以下命令来更新一个已存在的文档  
 To update an existing doc, we can do the following
